@@ -11,6 +11,7 @@
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=flat-square&logo=docker&logoColor=white)](https://www.docker.com/)
 [![Burp Suite](https://img.shields.io/badge/Burp_Suite-Compatible-FF6633?style=flat-square&logo=portswigger&logoColor=white)](https://portswigger.net/burp)
 [![Modos](https://img.shields.io/badge/Modos-Aprendizaje_%7C_Guiado_%7C_Examen-2dd4bf?style=flat-square)](http://localhost:8010/help/settings)
+[![OS](https://img.shields.io/badge/OS-Linux_%7C_macOS_%7C_Windows-black?style=flat-square)](https://github.com/bitsofalber/oscp-burpsuite-learn)
 
 </div>
 
@@ -18,57 +19,170 @@
 
 ## 📋 Resumen del Escenario
 
-Bienvenido a **PeopleHub**, la intranet corporativa del grupo ficticio *Novera Group*. A través de 23 desafíos organizados en 6 módulos progresivos, investigarás la aplicación utilizando **Burp Suite** para descubrir:
+Bienvenido a **PeopleHub**, la intranet corporativa del grupo ficticio *Novera Group*. A través de 23 desafíos organizados en 6 módulos progresivos, auditarás la aplicación utilizando **Burp Suite** para descubrir:
 
-- 🌐 Identificación de tecnologías y mapeo de endpoints web.
-- 📡 Análisis de métodos HTTP y formulación de peticiones.
-- 🧩 Fugas de información en APIs JSON no documentadas.
-- 👤 Enumeración de usuarios por respuesta diferencial (404 vs 401).
-- 🔑 Extracción de credenciales en comentarios y scripts JavaScript.
-- 🚪 Movimiento lateral al portal interno de operaciones (*People Operations*).
-- ⚡ Manipulación de peticiones administrativas (POST JSON) para obtener la **Flag de Administrador**.
+- 🌐 **Reconocimiento:** Mapeo de rutas, identificación de tecnologías y análisis de código estático.
+- 📡 **Inspección HTTP:** Métodos HTTP (GET/POST), análisis de parámetros de cuerpo y formularios.
+- 👤 **Enumeración de Usuarios:** Detección de comportamientos diferenciales en respuestas (404 vs 401).
+- 🧩 **Fugas de Información en APIs:** Extracción de datos sensibles en respuestas JSON no mostradas en la interfaz.
+- 🔑 **Credenciales Expuestas:** Localización de accesos documentados y secretos en comentarios JavaScript.
+- 🚪 **Movimiento Lateral:** Acceso al portal interno secundario de operaciones (*People Operations*).
+- ⚡ **Escalada Administrativa:** Construcción manual de peticiones POST JSON para comprometer la plataforma y capturar la **Flag de Administrador**.
 
 ---
 
-## ⚡ Puesta en Marcha (1 Clic)
+## 🛠️ Requisitos Previos
 
-No necesitas instalar Python, Flask, pip ni bases de datos. Todo corre encapsulado en Docker.
+- **Docker y Docker Compose** instalados en tu sistema operativo.
+- **Burp Suite** (versión *Community Edition* o *Professional*).
+- **No necesitas instalar Python, Flask, pip ni crear entornos virtuales:** todo el entorno corre 100% encapsulado y aislado dentro del contenedor Docker.
 
-### 1. Iniciar el laboratorio
+---
 
-- **macOS:** Haz doble clic en `Iniciar-Mac.command`.  
-  *(Si macOS muestra advertencia de seguridad, abre Terminal en esta carpeta y ejecuta `chmod +x Iniciar-Mac.command` una sola vez).*
-- **Windows:** Haz doble clic en `Iniciar-Windows.bat`.
-- **Linux:** Ejecuta `./Iniciar-Mac.command` o `docker compose up --build`.
+## 🚀 Guía de Despliegue Paso a Paso
 
-### 2. Acceder al laboratorio
+Elige tu sistema operativo a continuación para poner en marcha el laboratorio:
 
-| Servicio | URL | Descripción |
+### 🐧 En Linux (Ubuntu, Kali Linux, Debian, Arch, etc.)
+
+Si estás en tu máquina Linux o en una distribución de pentesting (como Kali Linux):
+
+#### 1. Entrar en la carpeta del laboratorio
+Abre tu terminal y navega hasta el directorio de este laboratorio:
+```bash
+cd oscp-burpsuite-learn/OSCPT-Burp-Trainer
+```
+
+#### 2. Asegurarse de que el servicio de Docker esté corriendo
+```bash
+sudo systemctl start docker
+```
+
+#### 3. Levantar el laboratorio en segundo plano
+Ejecuta Docker Compose con el flag `-d` para que compile la imagen y se quede corriendo en segundo plano:
+```bash
+docker compose up -d --build
+```
+> [!NOTE]  
+> Si tu usuario no pertenece al grupo `docker`, ejecuta el comando con `sudo`:  
+> `sudo docker compose up -d --build`  
+> *(Para añadir tu usuario al grupo docker y no requerir sudo: `sudo usermod -aG docker $USER` y reinicia sesión).*
+
+#### 4. Verificar que el laboratorio está activo
+Comprueba el estado del contenedor:
+```bash
+docker compose ps
+```
+Deberás ver el servicio `oscpt-burp-trainer` en estado `Up` y publicando el puerto `127.0.0.1:8010`.
+
+#### 5. Consultar los logs en tiempo real (opcional)
+Si deseas ver las peticiones que llegan al servidor o depurar:
+```bash
+docker compose logs -f
+```
+*(Para salir del visor de logs pulsa `Ctrl + C`; el laboratorio seguirá funcionando en segundo plano).*
+
+---
+
+### 🍏 En macOS
+
+Tienes dos opciones de inicio:
+
+- **Opción A (1 Clic):** Abre la carpeta en Finder y haz doble clic sobre el archivo **`Iniciar-Mac.command`**.  
+  *(Si macOS te muestra una advertencia de seguridad la primera vez, abre la terminal en esta carpeta, ejecuta `chmod +x Iniciar-Mac.command` y vuelve a abrirlo).*
+- **Opción B (Terminal):** Abre tu terminal en esta carpeta y ejecuta:
+  ```bash
+  docker compose up -d --build
+  ```
+
+---
+
+### 🪟 En Windows
+
+- **Opción A (1 Clic):** Abre Docker Desktop y haz doble clic sobre el archivo **`Iniciar-Windows.bat`**.
+- **Opción B (PowerShell / CMD):**
+  ```powershell
+  docker compose up -d --build
+  ```
+
+---
+
+## 🌐 URLs de Acceso al Laboratorio
+
+Una vez iniciado el contenedor, abre tu navegador web o el navegador integrado de Burp Suite:
+
+| Servicio | URL Local | Descripción |
 | :--- | :--- | :--- |
-| **Plataforma de Retos** | [http://localhost:8010/help](http://localhost:8010/help) | **Acceso libre sin login**. Panel interactivo con preguntas, pistas y formato de respuesta con máscara `**`. |
-| **Aplicación Objetivo** | [http://localhost:8010/](http://localhost:8010/) | Portal corporativo PeopleHub a auditar con Burp Suite. |
-| **Comprobación de Salud** | [http://localhost:8010/health](http://localhost:8010/health) | Endpoint de comprobación de estado de la aplicación. |
+| **Plataforma de Retos (CTF)** | [http://localhost:8010/help](http://localhost:8010/help) | **Acceso libre e inmediato (sin registro ni login previo)**. Sala de retos interactiva con los 23 objetivos, pistas y retroalimentación en tiempo real. |
+| **Aplicación Objetivo** | [http://localhost:8010/](http://localhost:8010/) | Portal corporativo *PeopleHub* de Novera Group (el objetivo web que debes auditar). |
+| **Nivel de Ayuda** | [http://localhost:8010/help/settings](http://localhost:8010/help/settings) | Selector entre **Modo Aprendizaje** (con guía de herramientas Burp), **Modo Guiado** y **Modo Examen**. |
+| **Comprobación de Salud** | [http://localhost:8010/health](http://localhost:8010/health) | Endpoint de verificación del servicio (`{"status": "ok"}`). |
 
 ---
 
-## 🛑 Detener y Limpiar el Laboratorio (Sin residuos)
+## 🎯 Metodología de Auditoría con Burp Suite
 
-Para apagar el laboratorio y eliminar automáticamente contenedores, redes, el volumen de datos SQLite y las imágenes construidas:
-
-- **macOS:** Doble clic en `Detener-y-Borrar-Mac.command` o ejecuta `./stop_and_erase.sh`.
-- **Windows:** Doble clic en `Detener-y-Borrar-Windows.bat` (o `stop_and_erase.bat`).
-- **Terminal:** `docker compose down --rmi all --volumes --remove-orphans`.
+1. **Abrir Burp Suite:** Inicia Burp Suite en tu equipo.
+2. **Usar el navegador integrado (Recomendado):**
+   - Ve a la pestaña **Proxy** > **Open browser**.
+   - El navegador integrado viene preconfigurado con el certificado CA y envía todo el tráfico al proxy automáticamente sin requerir extensiones adicionales.
+3. **Comenzar la investigación:**
+   - Mantén abierta una pestaña en la **Plataforma de Retos** ([http://localhost:8010/help](http://localhost:8010/help)) para consultar las preguntas y enviar respuestas.
+   - Navega por la **Aplicación Objetivo** ([http://localhost:8010/](http://localhost:8010/)) mientras observas las peticiones en **Proxy > HTTP history**.
+4. **Formato de respuesta interactivo:**
+   - Cada tarea cuenta con una máscara de asteriscos (`**`) que te indica la cantidad exacta de caracteres y los símbolos que componen la solución (ejemplo: `/*****` para `/login` o `***.**` para `app.js`).
+   - Cada respuesta acertada desbloquea la siguiente tarea automáticamente.
+5. **Flag de Administrador (Objetivo Final):**
+   - El apartado de la bandera final en `/help/final` está **siempre abierto**. Si consigues acceder a `/ops/admin` directamente o por otra vía alternativa, puedes enviar la flag en cualquier momento sin necesidad de haber completado las 23 tareas previas.
 
 ---
 
-## 🛠️ Configuración con Burp Suite
+## 🛑 Detener y Limpiar el Laboratorio (Sin dejar basura)
 
-1. Abre Burp Suite.
-2. Utiliza el **navegador integrado** de Burp (*Proxy > Open browser*) para que todo el tráfico pase por el proxy de forma automática.
-3. Navega a `http://127.0.0.1:8010/` para auditar la aplicación y a `http://127.0.0.1:8010/help` para enviar tus respuestas y seguir las tareas.
+Cuando termines tu sesión de práctica y quieras apagar el laboratorio eliminando contenedores, redes, el volumen de base de datos SQLite y las imágenes locales para que no ocupen espacio en disco:
+
+### En Linux:
+Ejecuta el script de limpieza automatizado:
+```bash
+./stop_and_erase.sh
+```
+O directamente con Docker:
+```bash
+docker compose down --rmi all --volumes --remove-orphans
+```
+
+### En macOS:
+- Doble clic en **`Detener-y-Borrar-Mac.command`** o ejecuta `./stop_and_erase.sh`.
+
+### En Windows:
+- Doble clic en **`Detener-y-Borrar-Windows.bat`** (o `stop_and_erase.bat`).
+
+---
+
+## 🔧 Solución de Problemas Frecuentes (Troubleshooting)
+
+### 1. `permission denied while trying to connect to the Docker daemon socket` (en Linux)
+Tu usuario no tiene permisos para hablar con el demonio de Docker sin `sudo`.
+- **Solución rápida:** Ejecuta los comandos con `sudo` (ejemplo: `sudo docker compose up -d --build`).
+- **Solución permanente:** Añade tu usuario al grupo docker:
+  ```bash
+  sudo usermod -aG docker $USER
+  newgrp docker
+  ```
+
+### 2. `Bind for 127.0.0.1:8010 failed: port is already allocated`
+Significa que otro proceso o contenedor ya está utilizando el puerto 8010.
+- Comprueba qué contenedor lo está ocupando con:
+  ```bash
+  docker ps | grep 8010
+  ```
+- O localiza el proceso en tu máquina con:
+  ```bash
+  sudo lsof -i :8010
+  ```
 
 ---
 
 ## ⚠️ Uso Autorizado
 
-Este laboratorio está diseñado exclusivamente con fines formativos y de entrenamiento técnico controlado. No expongas este contenedor directamente a Internet.
+Este laboratorio ha sido creado con fines estrictamente educativos y para la preparación de exámenes de certificación técnica en entornos locales controlados. No expongas este servicio a redes públicas ni a Internet.
