@@ -1,0 +1,24 @@
+name: oscpt-burp-trainer
+
+services:
+  oscpt-burp-trainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: oscpt-burp-trainer:local
+    ports:
+      - "127.0.0.1:8010:8010"
+    environment:
+      OSCPT_SECRET_KEY: "${OSCPT_SECRET_KEY:-local-training-session-key-change-for-shared-hosts}"
+      OSCPT_DB_PATH: "/app/data/oscpt_burp_trainer.db"
+      FLASK_DEBUG: "${FLASK_DEBUG:-1}"
+    volumes:
+      - trainer_data:/app/data
+      - ./oscpt_burp_trainer.py:/app/oscpt_burp_trainer.py
+    restart: unless-stopped
+    init: true
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  trainer_data:
