@@ -51,6 +51,15 @@ El proyecto está orientado a estudiantes y profesionales que se preparan para c
 | **OSCPT Burp Trainer** | Intranet corporativa (*PeopleHub* de Novera Group) con 23 tareas guiadas, pistas por niveles y bandera de administrador. | Proxy, Repeater, APIs JSON, Bypasses de autenticación | `🟢 Disponible` | [Abrir Laboratorio](./OSCPT-Burp-Trainer/) |
 | *Próximo Laboratorio* | Escenario centrado en IDOR, manipulación de privilegios y control de acceso. | IDOR, Broken Access Control | `🟡 En desarrollo` | — |
 
+<br/>
+
+<div align="center">
+  <a href="./OSCPT-Burp-Trainer/">
+    <img src="./assets/oscpt-burp-trainer.jpg" alt="OSCPT Burp Trainer" width="100%" style="max-width: 780px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.4);"/>
+  </a>
+  <p><small><i>Portada oficial del laboratorio interactivo OSCPT Burp Trainer</i></small></p>
+</div>
+
 *Se irán incorporando nuevos laboratorios y escenarios progresivamente.*
 
 ---
