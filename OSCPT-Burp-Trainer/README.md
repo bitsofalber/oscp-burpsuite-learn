@@ -18,11 +18,11 @@ La primera ejecución descarga la imagen base e instala las dependencias dentro 
 
 ## Acceder
 
-- PeopleHub: http://localhost:8010/
-- Plataforma de desafíos: http://localhost:8010/help
+- Plataforma de desafíos (sin registro ni login previo): http://localhost:8010/help
+- PeopleHub (aplicación web vulnerable objetivo): http://localhost:8010/
 - Comprobación del servicio: http://localhost:8010/health
 
-Regístrate en PeopleHub y después accede a la plataforma de formación.
+Puedes acceder directamente a la plataforma de retos en `http://localhost:8010/help` para ver las instrucciones y comenzar con la tarea Q01.
 
 ## Detener y limpiar el laboratorio
 
