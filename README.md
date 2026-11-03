@@ -2,7 +2,7 @@ OSCPT Burp Suite Labs
 
 Laboratorios prácticos de Burp Suite diseñados para desarrollar y reforzar las habilidades de pentesting web necesarias para preparar la certificación OSCP.
 
-🎯 Sobre el proyecto
+### Sobre el proyecto
 
 OSCPT Burp Suite Labs es una colección de laboratorios prácticos y autoalojados (self-hosted) centrados en aprender y dominar Burp Suite mediante escenarios realistas de análisis y pruebas de seguridad en aplicaciones web.
 
