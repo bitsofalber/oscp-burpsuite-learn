@@ -1,0 +1,20 @@
+name: oscpt-enum-trainer
+
+services:
+  oscpt-enum-trainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: oscpt-enum-trainer:local
+    ports:
+      - "127.0.0.1:8011:8011"
+    environment:
+      OSCPT_SECRET_KEY: "${OSCPT_SECRET_KEY:-local-training-enum-session-key-change-for-shared-hosts}"
+      PORT: "8011"
+      FLASK_DEBUG: "${FLASK_DEBUG:-1}"
+    volumes:
+      - ./oscpt_enum_trainer.py:/app/oscpt_enum_trainer.py
+    restart: unless-stopped
+    init: true
+    security_opt:
+      - no-new-privileges:true

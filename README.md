@@ -46,18 +46,24 @@ El proyecto está orientado a estudiantes y profesionales que se preparan para c
 
 ## 🧪 Laboratorios Disponibles
 
-| Laboratorio | Descripción | Enfoque Principal | Estado | Enlace directo |
-| :--- | :--- | :--- | :---: | :---: |
-| **OSCPT Burp Trainer** | Intranet corporativa (*PeopleHub* de Novera Group) con 23 tareas guiadas, pistas por niveles y bandera de administrador. | Proxy, Repeater, APIs JSON, Bypasses de autenticación | `🟢 Disponible` | [Abrir Laboratorio](./OSCPT-Burp-Trainer/) |
-| *Próximo Laboratorio* | Escenario centrado en IDOR, manipulación de privilegios y control de acceso. | IDOR, Broken Access Control | `🟡 En desarrollo` | — |
+| Laboratorio | Descripción | Enfoque Principal | Puerto | Estado | Enlace directo |
+| :--- | :--- | :--- | :---: | :---: | :---: |
+| **OSCPT Burp Trainer (Lab 1)** | Intranet corporativa (*PeopleHub* de Novera Group) con 23 tareas guiadas, pistas por niveles y bandera de administrador. | Proxy, Repeater, APIs JSON, Bypasses de autenticación | `8010` | `🟢 Disponible` | [Abrir Laboratorio](./OSCPT-Burp-Trainer/) |
+| **OSCPT Enum Trainer (Lab 2)** | Portal de desarrolladores (*DevPortal* de Novera Group) con 16 retos interactivos, fuzzing, brute force y decodificación. | Reconocimiento, Fuzzing, Intruder, Decoder, JWT, Hex | `8011` | `🟢 Disponible` | [Abrir Laboratorio](./OSCPT-Enum-Trainer/) |
+| *Próximo Laboratorio* | Escenario centrado en SQL Injection, bypass de filtros y Broken Access Control. | SQLi, IDOR, Privilege Escalation | `8012` | `🟡 En desarrollo` | — |
 
 <br/>
 
 <div align="center">
   <a href="./OSCPT-Burp-Trainer/">
-    <img src="./assets/oscpt-burp-trainer.jpg" alt="OSCPT Burp Trainer" width="100%" style="max-width: 780px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.4);"/>
+    <img src="./assets/oscpt-burp-trainer.jpg" alt="OSCPT Burp Trainer" width="100%" style="max-width: 780px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.4); margin-bottom: 20px;"/>
   </a>
-  <p><small><i>Portada oficial del laboratorio interactivo OSCPT Burp Trainer</i></small></p>
+  <p><small><i>Lab 1: OSCPT Burp Trainer (PeopleHub - Fundamentos & Autenticación)</i></small></p>
+
+  <a href="./OSCPT-Enum-Trainer/">
+    <img src="./assets/oscpt-enum-trainer.jpg" alt="OSCPT Enum Trainer" width="100%" style="max-width: 780px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.4); margin-top: 15px; margin-bottom: 20px;"/>
+  </a>
+  <p><small><i>Lab 2: OSCPT Enum Trainer (DevPortal - Recon, Fuzzing, Intruder & Decoder)</i></small></p>
 </div>
 
 *Se irán incorporando nuevos laboratorios y escenarios progresivamente.*
